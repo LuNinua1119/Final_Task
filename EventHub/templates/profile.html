@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}
+Profile - EventHub
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    My Profile
+</h1>
+
+
+<div class="card w-75 mb-4">
+
+    <div class="card-body">
+
+        {% if profile_picture %}
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename=profile_picture
+                ) }}"
+                alt="Profile Picture"
+                class="rounded-circle mb-3"
+                width="150"
+                height="150"
+                style="object-fit: cover;"
+            >
+
+        {% else %}
+
+            <div
+                class="rounded-circle bg-secondary
+                       text-white d-flex
+                       align-items-center
+                       justify-content-center mb-3"
+                style="
+                    width: 150px;
+                    height: 150px;
+                    font-size: 48px;
+                "
+            >
+                {{ current_user.name[0]|upper }}
+            </div>
+
+        {% endif %}
+
+
+        <h5 class="card-title">
+            {{ current_user.name }}
+        </h5>
+
+
+        <p class="card-text">
+            <strong>Email:</strong>
+            {{ current_user.email }}
+        </p>
+
+
+        <p class="card-text">
+            <strong>Events created:</strong>
+            {{ user_events|length }}
+        </p>
+
+
+        <a
+            href="{{ url_for('edit_profile') }}"
+            class="btn btn-primary"
+        >
+            Edit Profile
+        </a>
+
+    </div>
+
+</div>
+
+
+<h2 class="mb-3">
+    My Events
+</h2>
+
+
+{% if user_events %}
+
+    {% for event in user_events %}
+
+        <div class="card w-75 mb-3">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    {{ event.title }}
+                </h5>
+
+                <p class="card-text">
+                    {{ event.short_description }}
+                </p>
+
+                <a
+                    href="{{ url_for(
+                        'event_detail',
+                        event_id=event.id
+                    ) }}"
+                    class="btn btn-primary"
+                >
+                    Read More
+                </a>
+
+                <a
+                    href="{{ url_for(
+                        'edit_event',
+                        event_id=event.id
+                    ) }}"
+                    class="btn btn-secondary"
+                >
+                    Edit
+                </a>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+
+{% else %}
+
+    <p>
+        You have not created any events yet.
+    </p>
+
+    <a
+        href="{{ url_for('add_event') }}"
+        class="btn btn-primary"
+    >
+        Create Your First Event
+    </a>
+
+{% endif %}
+
+{% endblock %}

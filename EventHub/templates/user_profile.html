@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ user.name }} - EventHub
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    {{ user.name }}
+</h1>
+
+<p class="lead">
+    Events created by {{ user.name }}
+</p>
+
+{% if user_events %}
+
+    {% for event in user_events %}
+
+        <div class="card w-75 mb-3">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    {{ event.title }}
+                </h5>
+
+                <p class="card-text">
+                    <strong>Date:</strong>
+                    {{ event.date.strftime(
+                        "%d %B %Y, %H:%M"
+                    ) }}
+                </p>
+
+                <p class="card-text">
+                    {{ event.short_description }}
+                </p>
+
+                <a
+                    href="{{ url_for(
+                        'event_detail',
+                        event_id=event.id
+                    ) }}"
+                    class="btn btn-primary"
+                >
+                    Read More
+                </a>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>
+        This user has not created any events yet.
+    </p>
+
+{% endif %}
+
+{% endblock %}

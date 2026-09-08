@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+About - EventHub
+{% endblock %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1 class="display-4">
+        About EventHub
+    </h1>
+
+    <p class="lead">
+        EventHub is a web platform for discovering
+        and managing events in one place.
+    </p>
+
+    <p>
+        Users can explore events, view event details,
+        and filter events by category.
+    </p>
+
+    <p>
+        Registered users can also create, edit
+        and delete their own events.
+    </p>
+
+    <a
+        href="{{ url_for('events') }}"
+        class="btn btn-primary"
+    >
+        Explore Events
+    </a>
+
+</div>
+
+{% endblock %}

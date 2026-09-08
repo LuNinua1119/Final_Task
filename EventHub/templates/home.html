@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home - EventHub
+{% endblock %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1 class="display-4">
+        Welcome To EventHub
+    </h1>
+
+    <p class="lead">
+         Discover and manage events in one place.
+    </p>
+
+    <div class="mt-4">
+
+        <a
+            href="{{ url_for('events') }}"
+            class="btn btn-primary btn-lg"
+        >
+             Explore Events
+        </a>
+
+        {% if current_user.is_authenticated %}
+
+            <a href="{{ url_for('add_event') }}"
+                class="btn btn-secondary btn-lg"
+            >
+                Create event
+            </a>
+
+        {% else %}
+
+            <a
+                href="{{ url_for('register') }}"
+                class="btn btn-secondary btn-lg"
+            >
+                Register
+            </a>
+        {% endif %}
+    </div>
+
+</div>
+
+
+{% endblock %}

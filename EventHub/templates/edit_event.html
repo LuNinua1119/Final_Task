@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Event - EventHub
+{% endblock %}
+
+{% block content %}
+
+<h1>Edit Event</h1>
+
+<form method="POST">
+
+    {{ form.hidden_tag() }}
+
+
+    <div class="mb-3">
+
+        {{ form.title.label(
+            class="form-label"
+        ) }}
+
+        {{ form.title(
+            class="form-control"
+        ) }}
+
+        {% for error in form.title.errors %}
+            <div class="text-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    <div class="mb-3">
+
+        {{ form.short_description.label(
+            class="form-label"
+        ) }}
+
+        {{ form.short_description(
+            class="form-control"
+        ) }}
+
+        {% for error in form.short_description.errors %}
+            <div class="text-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    <div class="mb-3">
+
+        {{ form.description.label(
+            class="form-label"
+        ) }}
+
+        {{ form.description(
+            class="form-control",
+            rows=5
+        ) }}
+
+        {% for error in form.description.errors %}
+            <div class="text-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    <div class="mb-3">
+
+        {{ form.location.label(
+            class="form-label"
+        ) }}
+
+        {{ form.location(
+            class="form-control"
+        ) }}
+
+        {% for error in form.location.errors %}
+            <div class="text-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    <div class="mb-3">
+
+        {{ form.date.label(
+            class="form-label"
+        ) }}
+
+        {{ form.date(
+            class="form-control"
+        ) }}
+
+        {% for error in form.date.errors %}
+            <div class="text-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    <div class="mb-3">
+
+        {{ form.ticket_price.label(
+            class="form-label"
+        ) }}
+
+        {{ form.ticket_price(
+            class="form-control"
+        ) }}
+
+        {% for error in form.ticket_price.errors %}
+            <div class="text-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    <div class="mb-3">
+
+        {{ form.organizer.label(
+            class="form-label"
+        ) }}
+
+        {{ form.organizer(
+            class="form-control"
+        ) }}
+
+        {% for error in form.organizer.errors %}
+            <div class="text-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    <div class="mb-3">
+
+        {{ form.category.label(
+            class="form-label"
+        ) }}
+
+        {{ form.category(
+            class="form-select"
+        ) }}
+
+        {% for error in form.category.errors %}
+            <div class="text-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    {{ form.submit(
+        class="btn btn-primary"
+    ) }}
+
+    <a
+        href="{{ url_for(
+            'event_detail',
+            event_id=event.id
+        ) }}"
+        class="btn btn-secondary"
+    >
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}

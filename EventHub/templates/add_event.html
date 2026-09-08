@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Event - EventHub
+{% endblock %}
+
+{% block content %}
+
+<h1>Create Event</h1>
+
+<form method="POST">
+
+    {{ form.hidden_tag() }}
+
+    <div>
+        {{ form.title.label }}
+        {{ form.title() }}
+
+        {% for error in form.title.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+    <div>
+        {{ form.short_description.label }}
+        {{ form.short_description() }}
+
+        {% for error in form.short_description.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+    <div>
+        {{ form.description.label }}
+        {{ form.description(rows=6) }}
+
+        {% for error in form.description.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+    <div>
+        {{ form.location.label }}
+        {{ form.location() }}
+
+        {% for error in form.location.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.date.label }}
+        {{ form.date() }}
+
+        {% for error in form.date.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+
+    <div>
+        {{ form.ticket_price.label }}
+        {{ form.ticket_price() }}
+
+        {% for error in form.ticket_price.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+
+    <div>
+        {{ form.organizer.label }}
+        {{ form.organizer() }}
+
+        {% for error in form.organizer.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+
+    <div>
+        {{ form.category.label }}
+        {{ form.category() }}
+
+        {% for error in form.category.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+
+
+    <div>
+        {{ form.submit() }}
+    </div>
+
+
+</form>
+
+{% endblock %}

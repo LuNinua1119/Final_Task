@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ event.title }} - EventHub
+{% endblock %}
+
+{% block content %}
+
+<div class="card w-75">
+
+    <div class="card-body">
+
+        <h1 class="card-title">
+            {{ event.title }}
+        </h1>
+
+        <p>
+            <strong>Category:</strong>
+            {{ event.category }}
+        </p>
+
+        <p>
+            <strong>Location:</strong>
+            {{ event.location }}
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            {{ event.date.strftime("%d %B %Y, %H:%M") }}
+        </p>
+
+        <p>
+            <strong>Organizer:</strong>
+            {{ event.organizer }}
+        </p>
+
+        <p>
+            <strong>Ticket Price:</strong>
+
+            {% if event.ticket_price == 0 %}
+                Free
+            {% else %}
+                {{ "%.2f"|format(event.ticket_price) }} GEL
+            {% endif %}
+        </p>
+
+        <hr>
+
+        <h5>
+    Current Weather
+</h5>
+
+{% if weather %}
+
+    <p>
+        <strong>Temperature:</strong>
+        {{ weather.temperature }} °C
+    </p>
+
+    <p>
+        <strong>Condition:</strong>
+        {{ weather.description }}
+    </p>
+
+    <p>
+        <strong>Humidity:</strong>
+        {{ weather.humidity }}%
+    </p>
+
+{% else %}
+
+    <p>
+        Weather information is currently unavailable.
+    </p>
+
+{% endif %}
+
+        <hr>
+
+        <h5>
+            About this event
+        </h5>
+
+        <p class="card-text">
+            {{ event.description }}
+        </p>
+
+        <p>
+            <strong>Added by:</strong>
+            {{ event.author.name }}
+        </p>
+
+
+        {% if current_user.is_authenticated
+              and current_user.id == event.user_id %}
+
+            <a
+                href="{{ url_for(
+                    'edit_event',
+                    event_id=event.id
+                ) }}"
+                class="btn btn-primary"
+            >
+                Edit Event
+            </a>
+
+
+            <form
+                action="{{ url_for(
+                    'delete_event',
+                    event_id=event.id
+                ) }}"
+                method="POST"
+                class="d-inline"
+            >
+
+                {{ delete_form.hidden_tag() }}
+
+                {{ delete_form.submit(
+                    class="btn btn-danger"
+                ) }}
+
+            </form>
+
+        {% endif %}
+
+
+        <a
+            href="{{ url_for('events') }}"
+            class="btn btn-secondary"
+        >
+            Back to Events
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
